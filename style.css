@@ -1,0 +1,243 @@
+:root {
+    --box-p-color: rgba(253, 161, 40, 0.7);
+    --box-color: rgba(253, 161, 40, 0.4);
+    --text-section-color: rgba(255, 255, 255, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'Keania One';
+    src: url('assets/KeaniaOne-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jura';
+    src: url('assets/subset-Jura-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Прямокутники */
+
+.box-wrapper {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-areas:
+        ".  b2  ."
+        "b4 b1 b5"
+        ".  b3  .";
+    gap: 0;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+    z-index: -1;
+}
+
+.b1 {
+    grid-area: b1;
+    width: 250px;
+    height: 250px;
+    background-color: var(--box-p-color);
+    z-index: -1;
+}
+
+.b2 {
+    grid-area: b2;
+    width: 250px;
+    height: 350px;
+    background-color: var(--box-color);
+    z-index: -1;
+}
+
+.b3 {
+    grid-area: b3;
+    width: 250px;
+    height: 430px;
+    background-color: var(--box-color);
+    z-index: -1;
+}
+
+.b4 {
+    grid-area: b4;
+    width: 100%;
+    height: 250px;
+    background-color: var(--box-color);
+    z-index: -1;
+}
+
+.b5 {
+    grid-area: b5;
+    width: 100%;
+    height: 250px;
+    background-color: var(--box-color);
+    z-index: -1;
+}
+
+/* Текст і контент*/
+h1 {
+    font-family: 'Keania One', cursive;
+    font-size: 64px;
+    color: black;
+    text-align: center;
+    letter-spacing: 3px;
+    margin-top: 100px;
+    z-index: 1;
+}
+
+main {
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto 18px auto;
+    z-index: 1;
+}
+
+.main-text {
+    font-family: 'Jura', sans-serif;
+    font-size: 20px;
+    background-color: var(--text-section-color);
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    max-width: 600px;
+    padding: 40px;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.img-wrapper img {
+    max-width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 50px;
+    background-color: var(--text-section-color);
+    font-family: "Jura", sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    z-index: 1;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    background-color: var(--text-section-color);
+}
+
+.name,
+.text {
+    padding: 50px;
+}
+
+.small-text {
+    font-family: 'Jura', sans-serif;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    padding: 20px;
+    z-index: 1;
+}
+
+.phone {
+    color: black;
+    text-decoration: none;
+}
+
+.phone:hover {
+    color: #007bff;
+}
+
+@media (max-width: 1275px) {
+
+    main {
+        justify-content: space-evenly;
+        width: 90%;
+    }
+}
+
+@media (max-width: 945px) {
+    h1 {
+        font-size: 48px;
+    }
+
+    main {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .b3 {
+        height: 680px;
+    }
+}
+
+@media (max-width: 625px) {
+    body {
+        background-color: var(--box-p-color);
+    }
+
+    .box-wrapper {
+        display: none;
+    }
+
+    h1 {
+        width: 320px;
+        margin: 50px auto;
+        font-size: 33px;
+        background-color: var(--text-section-color);
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .main-text {
+        order: 2;
+    }
+
+    section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        padding: 40px 20px;
+        margin: 20px;
+        border-radius: 10px;
+    }
+
+    .name,
+    .text {
+        padding: 0;
+    }
+
+    footer {
+        background-color: transparent;
+    }
+
+}
+
+
+
+/* h1 {
+        font-size: 48px;
+    }
+    main {
+        width: 90%;
+    } */

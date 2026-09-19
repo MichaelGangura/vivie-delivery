@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vivie-delivery.pp.ua/sitemap.xml

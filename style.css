@@ -129,7 +129,7 @@ main {
     justify-self: center;
 
     width: 330px;
-    height: 330px;
+    height: 300px;
     padding: 20px;
 
     background-color: var(--box-a-color);

@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Jura';
+    src: url('/assets/subset-Jura-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --box-a-color: #787878;
+    --box-p-color: #fda128;
+    --box-color: #dcdcdc;
+    --box-p-glow: rgba(253, 161, 40, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@layer utilities {
+    .grid-areas-layout {
+        grid-template-areas:
+            ".  b2  ."
+            "b4 b1 b5"
+            ".  b3  .";
+    }
+    .area-b1 { grid-area: b1; }
+    .area-b2 { grid-area: b2; }
+    .area-b3 { grid-area: b3; }
+    .area-b4 { grid-area: b4; }
+    .area-b5 { grid-area: b5; }
+}
+
+/* ==========================================================================
+   MOBILE & TABLET ANIMATIONS SYSTEM (<= 1200px)
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+    body {
+        background-color: var(--box-color);
+        overflow-x: hidden;
+    }
+    .b1, .b2, .b3, .b4, .b5 {
+        display: none !important;
+    }
+}
+
+/* Scroll reveal utility classes for mobile/tablet */
+.m-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    will-change: opacity, transform;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.m-reveal-left {
+    opacity: 0;
+    transform: translateX(-18px);
+    will-change: opacity, transform;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.m-reveal-right {
+    opacity: 0;
+    transform: translateX(18px);
+    will-change: opacity, transform;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.m-reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    will-change: opacity, transform;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.m-reveal.is-visible,
+.m-reveal-left.is-visible,
+.m-reveal-right.is-visible,
+.m-reveal-scale.is-visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Delay helpers for smooth staggered entrance on mobile */
+.m-delay-1 { transition-delay: 0.1s; }
+.m-delay-2 { transition-delay: 0.2s; }
+.m-delay-3 { transition-delay: 0.3s; }
+.m-delay-4 { transition-delay: 0.4s; }
+
+/* 1. Van Suspended Idle Floating Animation */
+@keyframes vanSuspension {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(0.4deg);
+    }
+}
+
+/* 2. Van Shadow Pulse */
+@keyframes shadowPulse {
+    0%, 100% {
+        transform: scaleX(1) scaleY(1);
+        opacity: 0.45;
+    }
+    50% {
+        transform: scaleX(0.92) scaleY(0.85);
+        opacity: 0.25;
+    }
+}
+
+/* 3. Call Pulse Glow (Radar effect for phone CTA) */
+@keyframes callPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(253, 161, 40, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 16px rgba(253, 161, 40, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(253, 161, 40, 0);
+    }
+}
+
+/* 4. Live Status Dot Pulse */
+@keyframes livePulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+/* 5. Mobile Speed Line / Ambient Beam */
+@keyframes beamTravel {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(200%);
+    }
+}
+
+/* Apply continuous idle to van when in mobile/tablet mode */
+@media (max-width: 1200px) {
+    .animate-van-idle {
+        animation: vanSuspension 3.8s ease-in-out infinite;
+        will-change: transform;
+    }
+    .animate-van-shadow {
+        animation: shadowPulse 3.8s ease-in-out infinite;
+        will-change: transform, opacity;
+    }
+    .animate-call-pulse {
+        animation: callPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .animate-live-dot {
+        animation: livePulse 2s ease-in-out infinite;
+    }
+}
+
+/* Respect user's reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .m-reveal, .m-reveal-left, .m-reveal-right, .m-reveal-scale {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+

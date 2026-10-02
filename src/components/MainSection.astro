@@ -1,0 +1,264 @@
+---
+
+---
+
+<main class="block w-full min-h-[500px] my-[30px] mx-auto max-1200:min-h-0 max-430:mb-0">
+    <div class="box-wrapper">
+        <div class="b1"></div>
+        <div class="b2"></div>
+        <div class="b3"></div>
+        <div class="b4"></div>
+        <div class="b5"></div>
+
+        <div class="main-t-wrapper m-reveal-left m-delay-2">
+            <h2 class="name flex items-center justify-center gap-2">
+                <span>Послуги</span>
+            </h2>
+            <div class="main-text">
+                <p class="leading-relaxed">
+                    Вантажні перевезення / вантажне таксі.<br />
+                    Доставка будівельних матеріалів, меблів, побутової техніки, інше різне.<br />
+                    м. Стрий та область. <br />
+                    Залучення вантажників.
+                </p>
+            </div>
+        </div>
+
+        <div class="img-wrapper m-reveal-right m-delay-1 relative group cursor-pointer" id="mobile-van-card">
+            <!-- Subtle ambient headlight flare for mobile -->
+            <div class="absolute top-1/2 left-4 w-28 h-28 bg-[#fda128]/20 rounded-full blur-2xl pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <div class="relative z-10 animate-van-idle transition-transform duration-300 group-active:scale-95">
+                <img src="/assets/van.png" alt="Вантажний бус для перевезень" class="w-full h-auto drop-shadow-md" />
+            </div>
+
+            <!-- Dynamic Shadow under the van synced with floating suspension -->
+            <div class="w-[80%] h-3 bg-black/40 rounded-full mx-auto -mt-2 blur-[3px] animate-van-shadow pointer-events-none"></div>
+
+            <!-- Interactive mobile micro-toast tag on tap -->
+            <div id="van-status-toast" class="absolute top-3 right-3 bg-gray-900/90 text-white text-[12px] font-bold px-3 py-1.5 rounded-full border border-[#fda128] opacity-0 transform translate-y-2 transition-all duration-300 pointer-events-none shadow-xl flex items-center gap-1.5 z-20">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Opel Vivaro • В дорогу! 🚚</span>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    const vanCard = document.getElementById('mobile-van-card');
+    const vanToast = document.getElementById('van-status-toast');
+    let toastTimeout: any;
+
+    if (vanCard && vanToast) {
+        vanCard.addEventListener('click', () => {
+            vanToast.classList.remove('opacity-0', 'translate-y-2');
+            vanToast.classList.add('opacity-100', 'translate-y-0');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                vanToast.classList.remove('opacity-100', 'translate-y-0');
+                vanToast.classList.add('opacity-0', 'translate-y-2');
+            }, 2600);
+        });
+    }
+</script>
+
+<style>
+    .box-wrapper {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 2fr);
+        grid-template-rows: 350px 250px 330px;
+        grid-template-areas:
+            ".  b2  ."
+            "b4 b1 b5"
+            ".  b3  .";
+        width: 100%;
+        max-width: 1200px;
+        min-height: 500px;
+        z-index: -1;
+    }
+
+    .b1 {
+        grid-area: b1;
+        width: 250px;
+        min-width: 250px;
+        max-width: 250px;
+        height: 250px;
+        min-height: 250px;
+        max-height: 250px;
+        background-color: var(--box-p-color);
+        z-index: 0;
+    }
+
+    .b2 {
+        grid-area: b2;
+        width: 250px;
+        height: 350px;
+        background-color: var(--box-color);
+        z-index: -1;
+    }
+
+    .b3 {
+        grid-area: b3;
+        width: 250px;
+        height: 430px;
+        background-color: var(--box-color);
+        position: relative;
+        z-index: -1;
+        transform: translateY(-109px);
+    }
+
+    .b4 {
+        grid-area: b4;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: 250px;
+        background-color: var(--box-color);
+        z-index: -1;
+    }
+
+    .b5 {
+        grid-area: b5;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: 250px;
+        background-color: var(--box-color);
+        z-index: -1;
+    }
+
+    /* Оригінальні стилі для екранів > 425px */
+    .main-t-wrapper {
+        grid-area: b4;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        justify-self: center;
+        gap: 10px;
+        
+        width: 100%;
+        min-width: 0;
+        max-width: 330px;
+        height: auto;
+        padding: 20px;
+        background-color: var(--box-a-color);
+        color: white;
+        border: 4px solid #fda128;
+        z-index: 1;
+        box-sizing: border-box;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .main-text {
+        font-family: 'Jura', sans-serif;
+        font-size: 20px;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        letter-spacing: 2px;
+        z-index: 1;
+    }
+
+    .name {
+        font-family: 'Jura', sans-serif;
+        font-size: 27px;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        letter-spacing: 2px;
+        z-index: 1;
+    }
+
+    .img-wrapper {
+        grid-area: b5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        justify-self: center;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        z-index: 3;
+        box-sizing: border-box;
+    }
+
+    .img-wrapper img {
+        display: block;
+        width: 600px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    @media (max-width: 1200px) {
+        .b1, .b2, .b3, .b4, .b5 {
+            display: none;
+        }
+        .box-wrapper {
+            position: static;
+            transform: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: auto;
+            overflow: hidden;
+        }
+        .main-t-wrapper {
+            order: 2;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+            border-radius: 4px;
+        }
+        .main-t-wrapper:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px -5px rgba(0, 0, 0, 0.35);
+        }
+        .img-wrapper {
+            border: 4px solid #fda128;
+            width: 330px;
+            height: 300px;
+            padding: 15px;
+            background: radial-gradient(circle at center, rgba(253, 161, 40, 0.12) 0%, transparent 75%), #6e6e6e;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 0 15px rgba(253, 161, 40, 0.15);
+            border-radius: 4px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .img-wrapper:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px -5px rgba(0, 0, 0, 0.35), 0 0 25px rgba(253, 161, 40, 0.3);
+        }
+    }
+
+    /* Адаптив лише для екранів 425px і менше */
+    @media (max-width: 425px) {
+        .box-wrapper {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .main-t-wrapper {
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
+            height: auto;
+        }
+        .img-wrapper {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            min-height: 240px;
+        }
+    }
+</style>
+
